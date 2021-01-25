@@ -1,5 +1,5 @@
 import numpy as np
-from myutil.quality_util import cal_R2
+from myutil.probability_statistics_util import cal_R2
 
 def calibrate_alpha_beta(t,X):
     '''
