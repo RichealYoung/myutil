@@ -16,10 +16,7 @@ def calibrate_alpha_beta(t,X):
     beta=ls_estimation[1]
     # calculate the Coefficient_of_determination
     X_hat=alpha_L.reshape(1,H,W)*t.reshape(cal_t_count,1,1)+beta.reshape(1,H,W)
-    R2=cal_R2(X,X_hat)
-    # use the one's alpha_L whose R2 is highest to assign alpha, 
-    alpha=alpha_L[R2==R2.max()]
-    # replace the one's beta whose R2 is too low(such as lower than 0.8) by the neighboor beta
-    pass
+    R2=cal_R2(X,X_hat) 
+    alpha=alpha_L
     return alpha,beta,R2
 
