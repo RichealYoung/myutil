@@ -10,6 +10,8 @@ def cal_R2(y,yhat):
 def cal_dCor(x,y):
     #https://github.com/vnmabus/dcor
     return dcor.distance_correlation(x,y, method='AVL')
+def cal_KL(sample1,sample2):
+    return 0 #TODO
 def cal_list_multiproc(x,y_list,proc_count,cal_func,save_func):
     '''
     You have to write your own cal_func and save_func in the "main" function like below:
