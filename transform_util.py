@@ -105,6 +105,43 @@ class Resize:
         # if an img's shape=[H,W,1], then cropped img's shape will be [H,W]
         img_list_resized = [img[...,np.newaxis] for img in img_list_resized if len(img.shape)==2]
         return img_list_resized
+
+class AtleastResize:
+    def __init__(self,atleast_h,atleast_w):
+        self.atleast_h=atleast_h
+        self.atleast_w=atleast_w
+    def check(self):
+        if self.atleast_h and self.atleast_w:
+            return True
+        else:
+            print('not atleastresize')
+            return False
+    def __call__(self,img_list,):
+        """ resize every imgs in img_list if img_h < atleast_h or img_w < atleast_w
+
+        Args:
+            img_list (list):
+
+        Returns:
+            list: a list containing all imgs which are resized or not
+        """
+        def atleastresize(img):
+            H,W,_=img.shape
+            if H>=self.atleast_h and W>=self.atleast_w:
+                return img
+            elif H>=self.atleast_h and W<self.atleast_w:
+                return cv2.resize(img, dsize=(self.atleast_w,H))
+            elif H<self.atleast_h and W>=self.atleast_w:
+                return cv2.resize(img, dsize=(W,self.atleast_h))
+        img_list_resized = list(map(atleastresize,img_list))
+        # if an img's shape=[H,W,1], then cropped img's shape will be [H,W]
+        def check(img):
+            if len(img.shape)==2:
+                return img[...,np.newaxis]
+            else:
+                return img
+        img_list_resized = list(map(check,img_list_resized))
+        return img_list_resized
 class FlipRoat:
     def __init__(self,fliprot):
         self.fliprot=fliprot
