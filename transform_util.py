@@ -177,6 +177,17 @@ class Normalize:
             return True
     def __call__(self,img_list,):
         return [(img.astype(np.float64)/self.range-self.mean)/self.std for img in img_list]
+class Ratio:
+    def __init__(self,ratio):
+        self.ratio=ratio
+    def check(self):
+        if self.ratio==1:
+            print('not ratio')
+            return False
+        else:
+            return True
+    def __call__(self,img_list,):
+        return [img.astype(np.float64)*self.ratio for img in img_list]
 class ToTensor:
     def __init__(self,layout=None):
         self.layout=layout
