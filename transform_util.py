@@ -187,6 +187,16 @@ class ToTensor:
             return [torch.from_numpy(img).type(torch.FloatTensor) for img in img_list]
         else:
             return [torch.from_numpy(rearrange(img,self.layout)).type(torch.FloatTensor) for img in img_list]
+class ListToTensor:
+    def __init__(self,layout=None):
+        self.layout=layout
+    def check(self):
+        return True
+    def __call__(self,img_list,):
+        if self.layout == None:
+            return torch.cat([torch.from_numpy(img).type(torch.FloatTensor).unsqueeze(0) for img in img_list])
+        else:
+            return rearrange(torch.cat([torch.from_numpy(img).type(torch.FloatTensor).unsqueeze(0) for img in img_list]),self.layout)
 
 def crop2batch(img_list,cropsize=3):
     imgbatch_list=[]
