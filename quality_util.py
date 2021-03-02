@@ -14,8 +14,5 @@ def cal_psnrssim(img_gt,img_hat):
     # img_hat=img_hat*img_gt.mean()/img_hat.mean()
     H,W,C=img_gt.shape
     img_hat_psnr=psnr(img_gt,img_hat,data_range=img_gt.max())
-    if C==1:
-        img_hat_ssim = ssim(img_gt,img_hat,data_range=img_gt.max())
-    else:
-        img_hat_ssim = ssim(img_gt,img_hat,data_range=img_gt.max(),multichannel=True)
+    img_hat_ssim = ssim(img_gt,img_hat,data_range=img_gt.max(),multichannel=True)
     return img_hat_psnr,img_hat_ssim
