@@ -44,3 +44,20 @@ def read_multiproc(imgdir,proc_count,read_func,save_func,img_count=None):
         pool.apply_async(read_func, args=(i,imgpath),callback=save_func)
     pool.close()
     pool.join()
+def read_multiproc_from_imgpath_list(imgpath_list,proc_count,read_func,save_func):
+    '''
+    You have to write your own read_func and save_func in the "main" function like below:
+    def read_func(i,imgpath):
+        img=io_util.read_raw16img(imgpath)
+        return [i,img]
+    def save_func(i_img):
+        global img_data,img_shape
+        i=i_img[0]
+        img=i_img[1]
+        img_data[:,:,i]=img.reshape((*img_shape))
+    '''
+    pool = Pool(proc_count)
+    for i,imgpath in enumerate(imgpath_list):
+        pool.apply_async(read_func, args=(i,imgpath),callback=save_func)
+    pool.close()
+    pool.join()
