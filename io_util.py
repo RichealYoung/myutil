@@ -3,6 +3,22 @@ import cv2
 from multiprocessing import Pool
 import os
 from os.path import join as opj
+def gen_pathlist_fromimgdir(imgdir)->list:
+    imgnamelist=os.listdir(imgdir)
+    imgpathlist=[opj(imgdir,imgname) for imgname in imgnamelist]
+    imgpathlist.sort()
+    return imgpathlist
+def gen_pathlist_fromimgdirdir(imgdirdir)->list:
+    imgpathlist=[]
+    imgdirnamelist=os.listdir(imgdirdir)
+    imgdirlist=[opj(imgdirdir,imgdirname) for imgdirname in imgdirnamelist]
+    imgdirlist.sort()
+    for imgdir in imgdirlist:
+        imgnamelist=os.listdir(imgdir)
+        imgpathlist_=[opj(imgdir,imgname) for imgname in imgnamelist]
+        imgpathlist_.sort()
+        imgpathlist.extend(imgpathlist_)
+    return imgpathlist
 def read_any8img(imgpath)->np.ndarray:
     img=cv2.imdecode(np.fromfile(imgpath,dtype=np.uint8),-1)
     return img

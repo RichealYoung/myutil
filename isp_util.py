@@ -9,9 +9,9 @@ def emccd_isp(img_ptn,EMgain=300,addnoise=True,damp=False,clip=True):
     baseline = 500
     EMgain = 300
     ptn_max=((65535-baseline)/(e_per_edu*EMgain)-c)/QE
-    damp_ratio=np.sort(img_ptn.flatten())[-2]/ptn_max*1.1
     #TODO 确保只有零频分量可以饱和，其余值必须被准确测量，即不能饱和，但是由于受噪声影响，也不能完全保证
     if damp:
+        damp_ratio=np.sort(img_ptn.flatten())[-2]/ptn_max*1.1
         img_ptn=img_ptn/damp_ratio
     #### 2. add noise (related to ptn)
     if addnoise:

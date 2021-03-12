@@ -133,13 +133,15 @@ class AtleastResize:
                 return cv2.resize(img, dsize=(self.atleast_w,H))
             elif H<self.atleast_h and W>=self.atleast_w:
                 return cv2.resize(img, dsize=(W,self.atleast_h))
-        img_list_resized = list(map(atleastresize,img_list))
-        # if an img's shape=[H,W,1], then cropped img's shape will be [H,W]
+            elif H<self.atleast_h and W<self.atleast_w:
+                 return cv2.resize(img, dsize=(self.atleast_w,self.atleast_h))
         def check(img):
             if len(img.shape)==2:
                 return img[...,np.newaxis]
             else:
                 return img
+        img_list_resized = list(map(atleastresize,img_list))
+        # if an img's shape=[H,W,1], then cropped img's shape will be [H,W]
         img_list_resized = list(map(check,img_list_resized))
         return img_list_resized
 class FlipRoat:
