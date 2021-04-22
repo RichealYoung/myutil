@@ -77,3 +77,11 @@ def read_multiproc_from_imgpath_list(imgpath_list,proc_count,read_func,save_func
         pool.apply_async(read_func, args=(i,imgpath),callback=save_func)
     pool.close()
     pool.join()
+def save_any8img(img,imgpath):
+    """save 8bit img
+
+    Args:
+        img ([type]): 0-255
+        imgpath ([type]): [description]
+    """
+    cv2.imencode('.png', img.astype(np.uint8))[1].tofile('C:\\Users\\yrz\\Desktop\\noisy.png')
