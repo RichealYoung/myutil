@@ -84,4 +84,4 @@ def save_any8img(img,imgpath):
         img ([type]): 0-255
         imgpath ([type]): [description]
     """
-    cv2.imencode('.png', img.astype(np.uint8))[1].tofile('C:\\Users\\yrz\\Desktop\\noisy.png')
+    cv2.imencode('.png', img.astype(np.uint8))[1].tofile(imgpath)
