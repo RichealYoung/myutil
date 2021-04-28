@@ -81,7 +81,7 @@ def save_any8img(img,imgpath):
     """save 8bit img
 
     Args:
-        img ([type]): 0-255
-        imgpath ([type]): [description]
+        img : 0-255
+        imgpath
     """
     cv2.imencode('.png', img.astype(np.uint8))[1].tofile(imgpath)

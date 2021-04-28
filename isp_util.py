@@ -1,5 +1,16 @@
 import numpy as np
+def gen_img_ptn(img,ap):
+    """generate img_ptn from given image and average photon number
 
+    Args:
+        img : image
+        ap :average photon number, img_ptn will have #ap photons per pixel
+
+    Returns:
+        img_ptn will have #ap photons per pixel
+    """
+    img_ptn = img/img.mean()*ap
+    return img_ptn
 def emccd_isp(img_ptn,EMgain=300,addnoise=True,damp=False,clip=True):
     #### 1. config
     QE = 0.9
