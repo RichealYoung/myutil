@@ -17,8 +17,8 @@ def plot(img,title="",savename="",savedir=None):
         plt.show()
     plt.close()
 def plot12(img1,img2,title1="",title2="",title="",savename="",savedir=None):
-    plt.figure()
-    plt.title(title)
+    fig = plt.figure()
+    fig.suptitle(title)
     plt.subplot(121)
     plt.title(title1)
     plt.imshow(img1,vmax=img1.max(),vmin=0)
@@ -72,8 +72,8 @@ def plot_boxplot(array,showfliers=True,whis=1.5,flierprops=None,title='',savenam
 
 def plot12_boxplot(array1,array2,showfliers=True,whis=1.5,flierprops=None,
                     title1="",title2="",title="",savename="",savedir=None):
-    plt.figure()
-    plt.title(title)
+    fig = plt.figure()
+    fig.suptitle(title)
     plt.subplot(121)
     plt.title(title1)
     plt.boxplot(array1,showfliers=showfliers,whis=whis,flierprops=flierprops)
